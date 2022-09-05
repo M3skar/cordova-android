@@ -420,6 +420,11 @@ public class SystemWebViewClient extends WebViewClient {
 
     @Override
     public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+        LOG.d(TAG, String.format("shouldInterceptRequest(): request=%s",request.getUrl()));
+        WebResourceResponse response = shouldInterceptRequest(view,request.getUrl().toString());
+        if (response != null){
+            return response;
+        }
         return this.assetLoader.shouldInterceptRequest(request.getUrl());
     }
 }
